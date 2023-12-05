@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+.breweryCard{
+  width: 350px;
+  background-color: rgb(147, 194, 174);
+  color: rgb(255, 255, 255);
+  border-radius: 25px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+.test{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
