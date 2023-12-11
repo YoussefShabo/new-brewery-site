@@ -15,7 +15,7 @@ const Brewery = (props) => {
           <h5>
             {props.brewery.city}, {props.brewery.state}
           </h5>
-          <h5>{props.brewery.country}</h5>
+          {/* <h5>{props.brewery.country}</h5> */}
           <div id="website">
             <a href={props.brewery.website_url}>
               {props.brewery.website_url &&
