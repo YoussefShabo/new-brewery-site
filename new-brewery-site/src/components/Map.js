@@ -1,28 +1,48 @@
-import React from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import React, { useState } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import './Map.css'
+
 
 const containerStyle = {
-  width: '400px',
-  height: '400px'
+  width: '55vw',
+  height: '90vh',
 };
 
 const center = {
-  lat: -34.397,
-  lng: 150.644
+  lat: 37.266,
+  lng: -97.733
 };
 
-function MyMapComponent() {
-  return (
-    <LoadScript googleMapsApiKey="AIzaSyAg8ECS62DqSm9xp9K4YFBmBs2Z0JKUr0Y">
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-      >
-        { /* Child components like markers go here */ }
-      </GoogleMap>
-    </LoadScript>
-  )
-}
+function MyMapComponent({ breweries }) {
+      //to delay markers loading until script is loaded
+  const [isApiLoaded, setIsApiLoaded] = useState(false); // State to track API load
+  
+    return (
+      <LoadScript googleMapsApiKey="AIzaSyAg8ECS62DqSm9xp9K4YFBmBs2Z0JKUr0Y"
+      onLoad={() => setIsApiLoaded(true)} // Set state to true when API loads
+    >
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={{ lat: 37.7749, lng: -97.4194 }}
+          zoom={5}
+        >
+          {isApiLoaded && breweries.map(brewery => {
+          const latitude = parseFloat(brewery.latitude);
+          const longitude = parseFloat(brewery.longitude);
+
+          if (!isNaN(latitude) && !isNaN(longitude)) {
+            return (
+              <Marker
+                key={brewery.id}
+                position={{ lat: latitude, lng: longitude }}
+              />
+            );
+          }
+          return null;
+        })}
+        </GoogleMap>
+      </LoadScript>
+    );
+  }
 
 export default MyMapComponent;

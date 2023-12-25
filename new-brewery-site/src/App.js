@@ -31,6 +31,8 @@ const App = () => {
   const [editingBrewery, setEditingBrewery] = useState(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
+
+
   //-----------------------------------
   //              NEW BREWERY
   //-----------------------------------
@@ -101,7 +103,7 @@ const App = () => {
 
   useEffect(() => {
     const page_number = 1;
-    const results_per_page = 10;
+    const results_per_page = 20;
     const url = `https://api.openbrewerydb.org/v1/breweries?page=${page_number}&per_page=${results_per_page}`;
 
     axios
@@ -113,6 +115,10 @@ const App = () => {
         console.error("Error fetching breweries:", error);
       });
   }, []);
+
+  
+
+
 
   return (
     <div>
@@ -150,14 +156,14 @@ const App = () => {
           Next
         </Button>
       </div>
-      <MyMapComponent />
-      <center>
-        <div>
+
+      <div className="main">
+        <div >
           {breweries.map((brewery) => {
             return (
-              <>
+              <div key={brewery.id}>
                 {/* CARDS SECTION */}
-                <div className="test" key={brewery.id}>
+                <div className="test">
                   <div className="breweryCard">
                     <Brewery brewery={brewery} />
                     <FloatingActionButtons
@@ -166,7 +172,7 @@ const App = () => {
                     />
                   </div>
                 </div>
-              </>
+              </div>
             );
           })}
           <Dialog open={isEditDialogOpen} onClose={handleCloseDialog}>
@@ -177,7 +183,11 @@ const App = () => {
             </DialogContent>
           </Dialog>
         </div>
-      </center>
+        <div>
+          <MyMapComponent breweries={breweries}/>
+        </div>
+      </div>
+
     </div>
   );
 };

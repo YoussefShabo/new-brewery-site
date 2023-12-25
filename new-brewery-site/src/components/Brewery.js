@@ -12,6 +12,8 @@ const Brewery = (props) => {
           <h5>Type: {props.brewery.brewery_type}</h5>
           <hr />
           <h5>{props.brewery.street}</h5>
+          <h5>{props.brewery.latitude}</h5>
+          <h5>{props.brewery.longitude}</h5>
           <h5>
             {props.brewery.city}, {props.brewery.state}
           </h5>
