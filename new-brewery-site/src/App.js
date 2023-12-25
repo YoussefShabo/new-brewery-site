@@ -19,6 +19,7 @@ import FloatingActionButtons from "./components/EditBtn";
 import Brewery from "./components/Brewery";
 import Edit from "./components/Edit";
 import { Card } from "@mui/material";
+import MyMapComponent from "./components/Map"
 
 const App = () => {
   const [breweries, setBreweries] = useState([]);
@@ -149,6 +150,7 @@ const App = () => {
           Next
         </Button>
       </div>
+      <MyMapComponent />
       <center>
         <div>
           {breweries.map((brewery) => {
